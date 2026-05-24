@@ -11,4 +11,29 @@ kubectl get pods -n argocd    # all should be Running
 
 kubectl patch svc argocd-server -n argocd -p '{"spec":{"type":"NodePort"}}'
 
-kubectl get svc argocd-server -n argocd # note the HTTPS NodePort
+kubectl get svc argocd-server -n argocd # note the HTTPS NodePort and use it to access the UI
+
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d && echo
+
+kubectl apply -f - <<EOF
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nginx-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/<your-username>/teleport-k8s-challenge.git # replace with your fork
+    targetRevision: main
+    path: manifests
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: web
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+EOF
