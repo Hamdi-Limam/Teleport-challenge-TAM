@@ -1,0 +1,18 @@
+# cert-manager will create a Secret named `nginx-tls` containing the issued cert+key.
+# The Ingress (08) references that Secret to terminate TLS.
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: nginx-tls
+  namespace: web
+spec:
+  secretName: nginx-tls            # cert-manager writes the cert/key here
+  duration: 2160h                  # 90 days
+  renewBefore: 360h                # renew 15 days before expiry (automatic rotation)
+  commonName: nginx.web.example.com
+  dnsNames:
+    - nginx.web.example.com
+  issuerRef:
+    name: selfsigned-issuer
+    kind: ClusterIssuer
+    group: cert-manager.io
