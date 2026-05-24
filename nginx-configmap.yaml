@@ -1,0 +1,22 @@
+# The static site content, mounted into the Nginx container.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-static-site
+  namespace: web
+data:
+  index.html: |
+    <!doctype html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8" />
+        <title>Teleport Take-Home — Nginx via RBAC</title>
+        <style>
+          body { font-family: system-ui, sans-serif; max-width: 40rem; margin: 4rem auto; }
+          code { background:#f4f4f4; padding:0 .3rem; border-radius:3px; }
+        </style>
+      </head>
+      <body>
+        <h1>It works 🎉</h1>
+      </body>
+    </html>
