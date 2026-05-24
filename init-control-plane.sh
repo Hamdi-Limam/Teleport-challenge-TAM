@@ -9,7 +9,7 @@ echo "[1/4] Running kubeadm init (pod CIDR ${POD_CIDR})…"
 kubeadm init --pod-network-cidr="${POD_CIDR}" | tee /root/kubeadm-init.log
 
 echo "[2/4] Wiring up kubectl for the invoking sudo user…"
-TARGET_HOME=$(eval echo "~${SUDO_USER:-root}")
+TARGET_HOME=$HOME
 mkdir -p "${TARGET_HOME}/.kube"
 cp -f /etc/kubernetes/admin.conf "${TARGET_HOME}/.kube/config"
 chown "$(id -u "${SUDO_USER:-root}")":"$(id -g "${SUDO_USER:-root}")" "${TARGET_HOME}/.kube/config"
