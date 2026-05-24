@@ -1,27 +1,16 @@
-# Ingress terminating TLS using the cert-manager-issued `nginx-tls` secret.
-# Requires an ingress controller in the cluster (e.g. ingress-nginx). If you didn't
-# install one, the secondary/fallback for the demo is to expose the Service via
-# NodePort and curl it directly — mention that fallback in the demo.
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+apiVersion: cert-manager.io/v1
+kind: Certificate
 metadata:
-  name: nginx
+  name: nginx-tls
   namespace: web
-  annotations:
-    kubernetes.io/ingress.class: nginx
 spec:
-  tls:
-    - hosts:
-        - nginx.web.example.com
-      secretName: nginx-tls        # produced by cert-manager (manifest 07)
-  rules:
-    - host: nginx.web.example.com
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: nginx
-                port:
-                  number: 80
+  secretName: nginx-tls            # cert-manager writes the cert/key here
+  duration: 2160h                  # 90 days
+  renewBefore: 360h                # renew 15 days before expiry (automatic rotation)
+  commonName: nginx.web.example.com
+  dnsNames:
+    - nginx.web.example.com
+  issuerRef:
+    name: selfsigned-issuer
+    kind: ClusterIssuer
+    group: cert-manager.io

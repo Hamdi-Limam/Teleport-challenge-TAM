@@ -1,0 +1,11 @@
+# NEVER commit private key material or generated user credentials.
+user-certs/
+*.key
+*.csr
+*.crt
+*.kubeconfig
+admin.conf
+
+# editor noise
+.DS_Store
+*.swp
