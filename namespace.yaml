@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: web
+  labels:
+    purpose: nginx-app
+    managed-by: nginx-team
