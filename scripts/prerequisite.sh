@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-# 00-prereqs.sh — OS preparation for a kubeadm node (run on ALL nodes as root)
-# Idempotent: safe to re-run.
+# prereqs.sh — OS preparation for a kubeadm node (run on ALL nodes as root)
 set -euo pipefail
 
 echo "[1/5] Disabling swap (kubelet requires this)…"

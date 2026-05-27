@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-# 01-install-k8s.sh — install pinned kubelet, kubeadm, kubectl (run on ALL nodes as root)
+# install-k8s.sh — install pinned kubelet, kubeadm, kubectl (run on ALL nodes as root)
 set -euo pipefail
 
-K8S_MINOR="v1.30"   # pin the minor; patch floats within it then we hold
+K8S_MINOR="v1.30"
 
 echo "[1/4] Installing apt prerequisites…"
 apt-get update -y

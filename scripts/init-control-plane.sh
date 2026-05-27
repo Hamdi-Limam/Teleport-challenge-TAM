@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-# 02-init-control-plane.sh — run on the CONTROL PLANE node only, as root.
+# init-control-plane.sh — run on the CONTROL PLANE node only, as root.
 set -euo pipefail
 
-POD_CIDR="192.168.0.0/16"   # Calico's default; keep them in sync
+POD_CIDR="192.168.0.0/16"   # Calico's default
 CALICO_VER="v3.27.3"
 
 echo "[1/4] Running kubeadm init (pod CIDR ${POD_CIDR})…"

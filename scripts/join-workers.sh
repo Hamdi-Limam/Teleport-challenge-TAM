@@ -1,8 +1,6 @@
-#!/usr/bin/env bash
-# 03-join-workers.sh — convenience helper.
+
 # kubeadm init already prints a join command (see 02 output). If the token
 # expired (they last 24h), regenerate one FROM THE CONTROL PLANE with:
-#
 #   kubeadm token create --print-join-command
 #
 # Then run THAT output on each worker as root. This script just regenerates it.
