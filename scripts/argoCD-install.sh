@@ -37,3 +37,5 @@ spec:
     syncOptions:
       - CreateNamespace=true
 EOF
+
+echo "ssh -i "cpl.pem" -L 8080:127.0.0.1:8080 ubuntu@ec2-98-84-27-234.compute-1.amazonaws.com"
