@@ -39,3 +39,4 @@ spec:
 EOF
 
 echo "ssh -i "cpl.pem" -L 8080:127.0.0.1:8080 ubuntu@ec2-98-84-27-234.compute-1.amazonaws.com"
+echo "kubectl port-forward --address 0.0.0.0 svc/argocd-server -n argocd 8080:443"
